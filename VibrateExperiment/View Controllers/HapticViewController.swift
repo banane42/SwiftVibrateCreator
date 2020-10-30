@@ -9,7 +9,7 @@
 import UIKit
 import CoreHaptics
 
-class ViewController: UIViewController {
+class HapticViewController: UIViewController {
 
     var engine: CHHapticEngine?
     
@@ -42,29 +42,61 @@ class ViewController: UIViewController {
     @IBOutlet weak var decayValueLabel: UILabel!
     @IBOutlet weak var releaseValueLabel: UILabel!
     
+    var i = 0
+    
     @IBAction func testButtonTapped(_ sender: Any) {
-        print("intensity: \(intensity)")
-        print("sharpness: \(sharpness)")
-        print("attack: \(attack)")
-        print("decay: \(decay)")
-        print("release: \(release)")
-        
-        let intensityPar = CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity)//0 to 1
-        let sharpnessPar = CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)//0 to 1
-        let attackPar = CHHapticEventParameter(parameterID: .attackTime, value: attack) //-1 to 1
-        let decayPar = CHHapticEventParameter(parameterID: .decayTime, value: decay)// -1 to 1
-        let releasePar = CHHapticEventParameter(parameterID: .releaseTime, value: release)// 0 to 1
-        //        let sustainPar = CHHapticEventParameter(parameterID: .sustained, value: Float(true))
-        
-        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensityPar, sharpnessPar, attackPar, decayPar, releasePar], relativeTime: 0)
-        
-        do {
-            let pattern = try CHHapticPattern(events: [event], parameters: [])
-            let player = try engine?.makePlayer(with: pattern)
-            try player?.start(atTime: 0)
-        } catch {
-            print("Failed to play vibration: \(error).")
+//        print("intensity: \(intensity)")
+//        print("sharpness: \(sharpness)")
+//        print("attack: \(attack)")
+//        print("decay: \(decay)")
+//        print("release: \(release)")
+//
+//        let intensityPar = CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity)//0 to 1
+//        let sharpnessPar = CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)//0 to 1
+//        let attackPar = CHHapticEventParameter(parameterID: .attackTime, value: attack) //-1 to 1
+//        let decayPar = CHHapticEventParameter(parameterID: .decayTime, value: decay)// -1 to 1
+//        let releasePar = CHHapticEventParameter(parameterID: .releaseTime, value: release)// 0 to 1
+//        //        let sustainPar = CHHapticEventParameter(parameterID: .sustained, value: Float(true))
+//
+//        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensityPar, sharpnessPar, attackPar, decayPar, releasePar], relativeTime: 0)
+//
+//        do {
+//            let pattern = try CHHapticPattern(events: [event], parameters: [])
+//            let player = try engine?.makePlayer(with: pattern)
+//            try player?.start(atTime: 0)
+//        } catch {
+//            print("Failed to play vibration: \(error).")
+//        }
+        switch i {
+            case 0:
+                print("Light")
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+            case 1:
+                print("Medium")
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+            case 2:
+                print("Heavy")
+                let generator = UIImpactFeedbackGenerator(style: .heavy)
+                generator.impactOccurred()
+            case 3:
+                print("rigid")
+                let generator = UIImpactFeedbackGenerator(style: .rigid)
+                generator.impactOccurred()
+            case 4:
+                print("soft")
+                let generator = UIImpactFeedbackGenerator(style: .soft)
+                generator.impactOccurred()
+            default:
+                print("Out of bounds")
         }
+        i += 1
+        if i > 4 {
+            i = 0
+        }
+            
+        
     }
     
     @IBAction func playButtonTapped(_ sender: Any) {
@@ -82,6 +114,40 @@ class ViewController: UIViewController {
         let newVibraiton = VibrationModel(duration: duration, intensity: intensity, sharpness: sharpness, attack: attack, decay: decay, release: release)
         viewModel.add(vibration: newVibraiton)
         tableView.reloadData()
+    }
+    
+    @IBAction func navigationButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Navigate to screen", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Basic vibration", style: .default, handler: { (action: UIAlertAction) in
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Load Pattern", style: .default, handler: { (action: UIAlertAction) in
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        self.present(alert, animated: true)
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Save Pattern", message: "Type what you want to name the pattern", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Name"
+        })
+        
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action: UIAlertAction) in
+            
+            if let title = alert.textFields?.first?.text {
+                print("Saving with name \(title)")
+            }
+            
+        }))
+        
+        self.present(alert, animated: true)
     }
     
     @IBAction func durationValueChagned(_ sender: Any) {
@@ -123,6 +189,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.backgroundColor = .white
         testButton.layer.cornerRadius = 5
         
         if configureHapticEngine() {
@@ -160,7 +227,7 @@ class ViewController: UIViewController {
             }
             
             engine?.stoppedHandler = { reason in
-                print("Engine stopped for \(reason)")
+                print("Engine stopped for reason: \(reason.rawValue)")
             }
             
             engine?.resetHandler = { [weak self] in
@@ -195,7 +262,7 @@ class ViewController: UIViewController {
 }
 
 //MARK: TableView Delegate
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension HapticViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.vibrations.count
     }
@@ -216,7 +283,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             self.tableView.reloadData()
             completionHandler(true)
         })
-        deleteAction.image = UIImage(named: "")
+        deleteAction.image = UIImage(systemName: "trash")
         deleteAction.backgroundColor = .red
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
@@ -241,71 +308,5 @@ class VibrationTableViewCell: UITableViewCell {
         attackValueLabel.text = model.attack.floatToString(digits: 2)
         decayValueLabel.text = model.decay.floatToString(digits: 2)
         releaseValueLabel.text = model.release.floatToString(digits: 2)
-    }
-}
-
-//MARK: VibrationViewModel
-class VibrationViewModel {
-    
-    var vibrations: [VibrationModel] = []
-    
-    func add(vibration: VibrationModel) {
-        vibrations.append(vibration)
-    }
-    
-    func delete(index: Int) {
-        vibrations.remove(at: index)
-    }
-    
-    func createPattern() -> CHHapticPattern? {
-        var events: [CHHapticEvent] = []
-        
-        var time: Float = 0
-        
-        for vibration in vibrations {
-            let intensityPar = CHHapticEventParameter(parameterID: .hapticIntensity, value: vibration.intensity)//0 to 1
-            let sharpnessPar = CHHapticEventParameter(parameterID: .hapticSharpness, value: vibration.sharpness)//0 to 1
-            let attackPar = CHHapticEventParameter(parameterID: .attackTime, value: vibration.attack) //-1 to 1
-            let decayPar = CHHapticEventParameter(parameterID: .decayTime, value: vibration.decay)// -1 to 1
-            let releasePar = CHHapticEventParameter(parameterID: .releaseTime, value: vibration.release)
-            
-            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensityPar, sharpnessPar, attackPar, decayPar, releasePar], relativeTime: TimeInterval(time))
-            
-            time += vibration.duration
-            
-            events.append(event)
-        }
-        return try? CHHapticPattern(events: events, parameters: [])
-    }
-    
-}
-
-//MARK: Vibration Model
-class VibrationModel {
-    var duration: Float = 0.1
-    var intensity: Float = 0.0
-    var sharpness: Float = 0.0
-    var attack: Float = 0.0
-    var decay: Float = 0.0
-    var release: Float = 0.0
-    
-    init(duration: Float, intensity: Float, sharpness: Float, attack: Float, decay: Float, release: Float) {
-        self.duration = duration
-        self.intensity = intensity
-        self.sharpness = sharpness
-        self.attack = attack
-        self.decay = decay
-        self.release = release
-    }
-    
-}
-
-extension Float {
-    func floatToString(digits: Int) -> String? {
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = digits
-        formatter.minimumFractionDigits = digits
-        formatter.numberStyle = .decimal
-        return formatter.string(for: self)
     }
 }

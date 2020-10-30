@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF748268254CBD30007F9D3D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF748267254CBD30007F9D3D /* Utility.swift */; };
+		EF74826D254CBE7B007F9D3D /* HapticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF74826C254CBE7B007F9D3D /* HapticViewController.swift */; };
+		EF748271254CBEA4007F9D3D /* VibrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF748270254CBEA4007F9D3D /* VibrationViewModel.swift */; };
 		EFA6B9CD2549F6940049B71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6B9CC2549F6940049B71B /* AppDelegate.swift */; };
 		EFA6B9CF2549F6940049B71B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6B9CE2549F6940049B71B /* SceneDelegate.swift */; };
-		EFA6B9D12549F6940049B71B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6B9D02549F6940049B71B /* ViewController.swift */; };
 		EFA6B9D42549F6940049B71B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA6B9D22549F6940049B71B /* Main.storyboard */; };
 		EFA6B9D62549F6950049B71B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA6B9D52549F6950049B71B /* Assets.xcassets */; };
 		EFA6B9D92549F6950049B71B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA6B9D72549F6950049B71B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF748267254CBD30007F9D3D /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		EF74826C254CBE7B007F9D3D /* HapticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticViewController.swift; sourceTree = "<group>"; };
+		EF748270254CBEA4007F9D3D /* VibrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VibrationViewModel.swift; sourceTree = "<group>"; };
 		EFA6B9C92549F6940049B71B /* VibrateExperiment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VibrateExperiment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA6B9CC2549F6940049B71B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFA6B9CE2549F6940049B71B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EFA6B9D02549F6940049B71B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EFA6B9D32549F6940049B71B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EFA6B9D52549F6950049B71B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFA6B9D82549F6950049B71B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -37,6 +41,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF748263254CBCCA007F9D3D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EF74826C254CBE7B007F9D3D /* HapticViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EF748264254CBCD7007F9D3D /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF748270254CBEA4007F9D3D /* VibrationViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		EF748266254CBCF5007F9D3D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EFA6B9D22549F6940049B71B /* Main.storyboard */,
+				EFA6B9D72549F6950049B71B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		EFA6B9C02549F6940049B71B = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +85,13 @@
 		EFA6B9CB2549F6940049B71B /* VibrateExperiment */ = {
 			isa = PBXGroup;
 			children = (
+				EF748266254CBCF5007F9D3D /* Storyboards */,
+				EF748264254CBCD7007F9D3D /* View Models */,
+				EF748263254CBCCA007F9D3D /* View Controllers */,
+				EF748267254CBD30007F9D3D /* Utility.swift */,
 				EFA6B9CC2549F6940049B71B /* AppDelegate.swift */,
 				EFA6B9CE2549F6940049B71B /* SceneDelegate.swift */,
-				EFA6B9D02549F6940049B71B /* ViewController.swift */,
-				EFA6B9D22549F6940049B71B /* Main.storyboard */,
 				EFA6B9D52549F6950049B71B /* Assets.xcassets */,
-				EFA6B9D72549F6950049B71B /* LaunchScreen.storyboard */,
 				EFA6B9DA2549F6950049B71B /* Info.plist */,
 			);
 			path = VibrateExperiment;
@@ -138,7 +168,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFA6B9D12549F6940049B71B /* ViewController.swift in Sources */,
+				EF748271254CBEA4007F9D3D /* VibrationViewModel.swift in Sources */,
+				EF74826D254CBE7B007F9D3D /* HapticViewController.swift in Sources */,
+				EF748268254CBD30007F9D3D /* Utility.swift in Sources */,
 				EFA6B9CD2549F6940049B71B /* AppDelegate.swift in Sources */,
 				EFA6B9CF2549F6940049B71B /* SceneDelegate.swift in Sources */,
 			);
