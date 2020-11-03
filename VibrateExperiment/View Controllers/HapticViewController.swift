@@ -45,57 +45,81 @@ class HapticViewController: UIViewController {
     var i = 0
     
     @IBAction func testButtonTapped(_ sender: Any) {
-//        print("intensity: \(intensity)")
-//        print("sharpness: \(sharpness)")
-//        print("attack: \(attack)")
-//        print("decay: \(decay)")
-//        print("release: \(release)")
-//
-//        let intensityPar = CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity)//0 to 1
-//        let sharpnessPar = CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)//0 to 1
-//        let attackPar = CHHapticEventParameter(parameterID: .attackTime, value: attack) //-1 to 1
-//        let decayPar = CHHapticEventParameter(parameterID: .decayTime, value: decay)// -1 to 1
-//        let releasePar = CHHapticEventParameter(parameterID: .releaseTime, value: release)// 0 to 1
-//        //        let sustainPar = CHHapticEventParameter(parameterID: .sustained, value: Float(true))
-//
-//        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensityPar, sharpnessPar, attackPar, decayPar, releasePar], relativeTime: 0)
-//
-//        do {
-//            let pattern = try CHHapticPattern(events: [event], parameters: [])
-//            let player = try engine?.makePlayer(with: pattern)
-//            try player?.start(atTime: 0)
-//        } catch {
-//            print("Failed to play vibration: \(error).")
+        print("intensity: \(intensity)")
+        print("sharpness: \(sharpness)")
+        print("attack: \(attack)")
+        print("decay: \(decay)")
+        print("release: \(release)")
+
+        let intensityPar = CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity)//0 to 1
+        let sharpnessPar = CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)//0 to 1
+        let attackPar = CHHapticEventParameter(parameterID: .attackTime, value: attack) //-1 to 1
+        let decayPar = CHHapticEventParameter(parameterID: .decayTime, value: decay)// -1 to 1
+        let releasePar = CHHapticEventParameter(parameterID: .releaseTime, value: release)// 0 to 1
+        //        let sustainPar = CHHapticEventParameter(parameterID: .sustained, value: Float(true))
+
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensityPar, sharpnessPar, attackPar, decayPar, releasePar], relativeTime: 0)
+
+        do {
+            let pattern = try CHHapticPattern(events: [event], parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play vibration: \(error).")
+        }
+
+//        switch i {
+//            case 0:
+//                print("Light")
+//                let generator = UIImpactFeedbackGenerator(style: .light)
+//                generator.impactOccurred()
+//            case 1:
+//                print("Medium")
+//                let generator = UIImpactFeedbackGenerator(style: .medium)
+//                generator.impactOccurred()
+//            case 2:
+//                print("Heavy")
+//                let generator = UIImpactFeedbackGenerator(style: .heavy)
+//                generator.impactOccurred()
+//            case 3:
+//                print("rigid")
+//                let generator = UIImpactFeedbackGenerator(style: .rigid)
+//                generator.impactOccurred()
+//            case 4:
+//                print("soft")
+//                let generator = UIImpactFeedbackGenerator(style: .soft)
+//                generator.impactOccurred()
+//            default:
+//                print("Out of bounds")
 //        }
-        switch i {
-            case 0:
-                print("Light")
-                let generator = UIImpactFeedbackGenerator(style: .light)
-                generator.impactOccurred()
-            case 1:
-                print("Medium")
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                generator.impactOccurred()
-            case 2:
-                print("Heavy")
-                let generator = UIImpactFeedbackGenerator(style: .heavy)
-                generator.impactOccurred()
-            case 3:
-                print("rigid")
-                let generator = UIImpactFeedbackGenerator(style: .rigid)
-                generator.impactOccurred()
-            case 4:
-                print("soft")
-                let generator = UIImpactFeedbackGenerator(style: .soft)
-                generator.impactOccurred()
-            default:
-                print("Out of bounds")
-        }
-        i += 1
-        if i > 4 {
-            i = 0
-        }
+//        i += 1
+//        if i > 4 {
+//            i = 0
+//        }
             
+//        switch i {
+//            case 0:
+//                print("Error")
+//                let gen = UINotificationFeedbackGenerator()
+//                gen.notificationOccurred(.error)
+//            case 1:
+//                print("Success")
+//                let gen = UINotificationFeedbackGenerator()
+//                gen.notificationOccurred(.success)
+//            case 2:
+//                print("Warning")
+//                let gen = UINotificationFeedbackGenerator()
+//                gen.notificationOccurred(.warning)
+//            default:
+//                print("out of bounds")
+//        }
+//        i += 1
+//        if i > 2 {
+//            i = 0
+//        }
+//        print("Selection changed")
+//        let selectionGen = UISelectionFeedbackGenerator()
+//        selectionGen.selectionChanged()
         
     }
     
